@@ -1,61 +1,33 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Katsayıları klavyeden alınan ikinci dereceden bir denklemin köklerini bulup ekrana yazdıran
-	programı yazınz.
-	Not: İleride daha iyisi yazılacaktır
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının faktoriyel değerine geri dönen factorial isimli metodu
+	yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+	 0! = 1 ve 1! = 1 olmak üzere
+	 n! = 1 * 2 * ... * n - 1 * n
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class App {
 	public static void main(String [] args)	
-	{		
-		QuadraticEquationSolverApp.run();
+	{	
+		IsPrimeTest.run();
 	}
 }
 
-
-class QuadraticEquationSolverApp {
+class IsPrimeTest {
 	public static void run()
-	{
-		java.util.Scanner kb = new java.util.Scanner(System.in);
-		
-		System.out.print("Katsayıları giriniz:");
-		double a = kb.nextDouble();
-		double b = kb.nextDouble();
-		double c = kb.nextDouble();
-
-		QuadraticEquationSolver.printRoots(a, b, c);
+	{	
+		for (int n = 0; n < 13; ++n)
+			System.out.printf("%d! = %d%n", n, NumberUtil.factorial(n));
 	}
 }
 
-class QuadraticEquationSolver {
-	public static void doWorkForRoots(double delta, double a, double b)
+class NumberUtil {
+	public static int factorial(int n)
 	{
-		double x1, x2;
-		double sqrtDelta;
-		
-		sqrtDelta = Math.sqrt(delta);
-		
-		x1 = (-b + sqrtDelta) / (2 * a);
-		x2 = (-b - sqrtDelta) / (2 * a);
-		
-		System.out.printf("x1 = %f, x2 = %f%n", x1, x2);
-	}
-	
-
-	public static double getDelta(double a, double b, double c)
-	{
-		return b * b - 4 * a * c;
-	}
-	
-	public static void printRoots(double a, double b, double c)
-	{
-		double delta = getDelta(a, b, c);
-		
-		if (delta >= 0)
-			doWorkForRoots(delta, a, b);
-		else
-			System.out.println("Gerçek kök yok");
-		
+		//TODO:
 	}
 }
+
+
 
