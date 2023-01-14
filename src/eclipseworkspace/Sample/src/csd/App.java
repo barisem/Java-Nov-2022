@@ -1,33 +1,42 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının faktoriyel değerine geri dönen factorial isimli metodu
-	yazınız ve aşağıdaki kod ile test ediniz
-	Açıklamalar:
-	 0! = 1 ve 1! = 1 olmak üzere
-	 n! = 1 * 2 * ... * n - 1 * n
+	Sınıf Çalışması: Parametresi ile aldığı n sayısı için n-inci Fibonacci sayısını döndüren fibonacciNumber isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklama:
+		- Fibonacci serisi
+			0 1 1 2 3 5 8 13 ...
+		- Metot pozitif olmayan değerler için kontrol yapmayacaktır
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class App {
 	public static void main(String [] args)	
 	{	
-		IsPrimeTest.run();
+		FibaonnaciNumberTest.run();
 	}
 }
 
-class IsPrimeTest {
+
+class FibaonnaciNumberTest {
 	public static void run()
-	{	
-		for (int n = 0; n < 13; ++n)
-			System.out.printf("%d! = %d%n", n, NumberUtil.factorial(n));
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n < 1)
+				break;
+			System.out.printf("%d.Fibonacci sayısı:%d%n", n, NumberUtil.fibonacciNumber(n));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
 	}
 }
 
 class NumberUtil {
-	public static int factorial(int n)
+	public static int fibonacciNumber(int n)
 	{
 		//TODO:
 	}
 }
-
-
-
