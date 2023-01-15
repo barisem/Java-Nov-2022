@@ -1,102 +1,48 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Demo menü uygulaması
-	(İleride daha iyisi yazılacaktır) 
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin geçerli olup olmadığını
+	test eden isValidDate isimli metodu yazınız ve aşağıdaki kod ile test ediniz  
+	(İleride daha iyisi yazılacaktır)
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class App {
 	public static void main(String [] args)	
 	{	
-		MenuApp.run();
+		IsValidDateTest.run();
 	}
 }
 
-
-class MenuApp {
-	public static void run()
-	{
-		Menu.run();
-		System.out.println("Tekrar yapıyor musunuz?");
-	}
-}
-
-class Menu {
-	public static void printMenu()
-	{
-		System.out.println("1.Ekle");
-		System.out.println("2.Sil");
-		System.out.println("3.Güncelle");
-		System.out.println("4.Listele");
-		System.out.println("5.Çıkış");
-		System.out.print("Seçenek:");
-	}
-	
-	public static void doInsert()
-	{
-		System.out.println("---------------------------------");
-		System.out.println("Ekle seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doDelete()
-	{
-		System.out.println("---------------------------------");
-		System.out.println("Sil seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doUpdate()
-	{
-		System.out.println("---------------------------------");
-		System.out.println("Güncelle seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doList()
-	{
-		System.out.println("---------------------------------");
-		System.out.println("Listele seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doOption(int option)
-	{
-		switch (option) {
-		case 1:
-			doInsert();
-			break;
-		case 2:
-			doDelete();
-			break;
-		case 3:
-			doUpdate();
-			break;
-		default:
-			doList();
-			
-		}
-	}
-	
+class IsValidDateTest {
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
 		
 		for (;;) {
-			printMenu();
-			int option = Integer.parseInt(kb.nextLine());
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
 			
-			if (1 <= option && option <= 5) {
-				if (option == 5)
-					break;
-				
-				doOption(option);
-			}
+			if (day == 0)
+				break;
+			
+			if (DateUtil.isValidDate(day, month, year))
+				System.out.printf("%02d/%02d/%04d tarihi geçerlidir%n", day, month, year);
 			else
-				System.out.println("Geçersiz Seçenek!...");
+				System.out.println("Geçersiz tarih!...");
+			
 		}
-		
-		System.out.println("Teşekkürler");
-		System.out.println("C ve Sistem Programcıları Derneği");	
 	}
 }
 
+class DateUtil {
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		//TODO:
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
