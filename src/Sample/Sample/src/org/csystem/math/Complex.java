@@ -1,22 +1,18 @@
-/*----------------------------------------------------------------------------------------------------------------------
+/*----------------------------------------------------------
+	FILE			: Complex.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
 	
------------------------------------------------------------------------------------------------------------------------*/
-package csd;
+	Complex class that represents a complex number
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math;
 
-class App {
-	public static void main(String [] args)	
-	{	
-		Complex z1 = new Complex(3.4, 9.7);
-		Complex z2 = new Complex();
-		Complex z3 = new Complex(3.4);
-		
-		System.out.println(z1.toString());
-		System.out.println(z2.toString());
-		System.out.println(z3.toString());
-	}
-}
+import static java.lang.Math.sqrt;
 
-class Complex {
+public class Complex {
 	public double real;
 	public double imag;
 	
@@ -118,7 +114,7 @@ class Complex {
 	
 	public double getLength()
 	{
-		return Math.sqrt(real * real + imag * imag);
+		return sqrt(real * real + imag * imag);
 	}
 	
 	public double getNorm()
@@ -131,3 +127,4 @@ class Complex {
 		return String.format("(%.2f, %.2f)", real, imag);
 	}	
 }
+
