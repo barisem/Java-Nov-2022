@@ -1,59 +1,19 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının basamalarından oluşan diziyi döndüren getDigits
-	isimli metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz:
+	Sınıf Çalışması: Aşağıdaki prototipi ve açıklması verilen metodu ArrayUtil sınıfı içerisinde yazınız:
+		int [] getHistogramData(int [] a, n)
 	Açıklamalar:
-		- Metot negatif sayılar için basamakları pozitif olarak diziye yerleştirecektir
+		- Metodun aldığı dizi içerisinde [0, n] aralığında sayılar olacaktır
+		- Metot [0, n] aralığındaki sayıların sıklık sayısını içeren diziye geri dönecektir. Yani her bir elamandan
+		kaç tane olduğunu tutan bir diziye dönecektir. Geri döndüğü dizinin sıfır numaralı indekteki elemanı sıfır sayısının,
+		1 numaralı indekteki elemanı 1 sayısının, ...,  n numaralı indekteki elemanı n sayısının kaç tane olduğu bilgisini
+		içerecektir
 -----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
-
-import java.util.Random;
-import java.util.Scanner;
-
-import static org.csystem.util.array.ArrayUtil.*;
 
 class App {
 	public static void main(String [] args)
 	{
-		ReverseTest.run();
+
 	}
 }
-
-class ReverseTest {
-	public static void run()
-	{
-		Scanner kb = new Scanner(System.in);
-		Random random = new Random();
-
-		System.out.print("Bir sayı giriniz:");
-		int count = kb.nextInt();
-
-		while (count-- > 0) {
-			System.out.println("--------------------------------------------------------------");
-			int [] a = getRandomArray(random, random.nextInt(3, 10), 0, 99);
-
-			print(2, a);
-			reverse(a);
-			print(2, a);
-			System.out.println("--------------------------------------------------------------");
-		}
-	}
-}
-
-
-class Util {
-	public static void reverse(int [] a)
-	{
-		for (int i = 0; i < a.length / 2; ++i)
-			swap(a, i, a.length - 1 - i);
-	}
-
-	public static void swap(int [] a, int i, int k)
-	{
-		int temp = a[i];
-
-		a[i] = a[k];
-		a[k] = temp;
-	}
-}
-
 
