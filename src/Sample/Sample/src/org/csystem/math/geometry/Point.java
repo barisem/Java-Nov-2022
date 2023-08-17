@@ -1,64 +1,84 @@
 /*----------------------------------------------------------
 	FILE			: Point.java
 	AUTHOR			: Java-Nov-2022 Group
-	LAST UPDATE		: 01.04.2023
+	LAST UPDATE		: 22.07.2023
 	
-	Point class that represents a point in cartesian plane
+	Immutable Point class that represents a point in cartesian plane
 	
 	Copyleft (c) 1993 C and System Programmers Association 
 	All Rights Free
 ------------------------------------------------------------*/
 package org.csystem.math.geometry;
 
-import static java.lang.Math.sqrt;
-import static java.lang.Math.pow;
+import static java.lang.Math.*;
 
 public class Point {
-	public double x, y; 
-	
-	public Point()
-	{	
-	}
-	
-	public Point(double a)
+	private static final double DELTA = 0.00001;
+	private final double m_x, m_y;
+
+	private Point(double a, double b, boolean polar)
 	{
-		x = a;
+		if (polar) {
+			m_x = a * cos(a);
+			m_y = a * sin(a);
+		}
+		else {
+			m_x = a;
+			m_y = b;
+		}
 	}
-	
-	public Point(double a, double b)
+
+	public static Point ofCartesian()
 	{
-		x = a;
-		y = b;
+		return ofCartesian(0);
 	}
-	
+
+	public static Point ofCartesian(double x)
+	{
+		return ofCartesian(x, 0);
+	}
+
+	public static Point ofCartesian(double x, double y)
+	{
+		return new Point(x, y, false);
+	}
+
+	public static Point ofPolar(double radius, double theta)
+	{
+		return new Point(radius, theta, true);
+	}
+
+	public double getX()
+	{
+		return m_x;
+	}
+
+	public double getY()
+	{
+		return m_y;
+	}
+
 	public double distance()
 	{
 		return distance(0, 0);
 	}
 	
-	public double distance(double a, double b)
+	public double distance(double x, double y)
 	{
-		return sqrt(pow(x - a, 2) + pow(y - b, 2));
+		return PointCommon.distance(m_x, m_y, x, y);
 	}
 	
 	public double distance(Point other)
 	{
-		return distance(other.x, other.y);
+		return distance(other.m_x, other.m_y);
 	}
-	
-	public void offset(double dxy)
+
+	public boolean equals(Object other)
 	{
-		offset(dxy, dxy);
+		return other instanceof Point p && abs(m_x - p.m_x) < DELTA && abs(m_y - p.m_y) < DELTA;
 	}
-	
-	public void offset(double dx, double dy)
-	{
-		x += dx;
-		y += dy;
-	}
-	
 	public String toString()
 	{
-		return String.format("(%.2f, %.2f)", x, y);
+		return PointCommon.toString(m_x, m_y);
 	}
 }

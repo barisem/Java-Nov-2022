@@ -1,7 +1,7 @@
 /*----------------------------------------------------------
 	FILE			: NumberUtil.java
 	AUTHOR			: Java-Nov-2022 Group
-	LAST UPDATE		: 02.04.2023
+	LAST UPDATE		: 24.06.2023
 	
 	Utility class for numeric operations
 	
@@ -13,7 +13,57 @@ package org.csystem.util.numeric;
 import static java.lang.Math.abs;
 import static java.lang.Math.log10;
 
-public class NumberUtil {
+public final class NumberUtil {
+	private NumberUtil()
+	{
+	}
+
+	private static final String [] ONES = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
+	private static final String [] TENS = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
+
+	private static int [] getDigits(long val, int n)
+	{
+		int [] digits = new int[val == 0 ? 1 : (int)(Math.log10(Math.abs(val)) / n) + 1];
+		int powOfTen = (int)pow(10, n);
+
+		val = abs(val);
+
+		for (int i = digits.length - 1; i >= 0; digits[i] = (int)(val % powOfTen), val /= powOfTen, --i)
+			;
+
+		return digits;
+	}
+
+	private static String numToText3DigitsTR(int a, int b, int c)
+	{
+		String str = "";
+
+		if (a != 0) {
+			if (a != 1)
+				str += ONES[a];
+
+			str += "yüz";
+		}
+
+		return str  + TENS[b] + ONES[c];
+	}
+
+	private static String numToText3DigitsTR(int val)
+	{
+		if (val == 0)
+			return "sıfır";
+
+		String str = val < 0 ? "eksi" : "";
+
+		val = Math.abs(val);
+
+		int a = val / 100;
+		int b = val / 10 % 10;
+		int c = val % 10;
+
+		return str + numToText3DigitsTR(a, b, c);
+	}
+
 	public static boolean areFriends(int a, int b)
 	{
 		return sumFactors(a) == b && sumFactors(b) == a;
@@ -78,14 +128,17 @@ public class NumberUtil {
 
 	public static int [] getDigits(long val)
 	{
-		int [] digits = new int[countDigits(val)];
+		return getDigits(val, 1);
+	}
 
-		val = abs(val);
+	public static int [] getDigitsInTwos(long val)
+	{
+		return getDigits(val, 2);
+	}
 
-		for (int i = digits.length - 1; i >= 0; digits[i--] = (int)(val % 10), val /= 10)
-			;
-
-		return digits;
+	public static int [] getDigitsInThrees(long val)
+	{
+		return getDigits(val, 3);
 	}
 	
 	public static int getHardyRamanujanCount(int n)
@@ -137,7 +190,6 @@ public class NumberUtil {
 			++val;
 		}
 	}
-
 
 	public static boolean isArmstrong(int a)
 	{

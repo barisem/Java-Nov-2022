@@ -1,11 +1,11 @@
 package org.csystem.random.lottery.numericlottery;
 
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class NumericLottery {
-    public Random random;
+    private final RandomGenerator m_randomGenerator;
 
-    public static int [] getNumbers(boolean [] flags)
+    private static int [] getNumbers(boolean [] flags)
     {
         int [] numbers = new int[6];
         int index = 0;
@@ -17,7 +17,7 @@ public class NumericLottery {
         return numbers;
     }
 
-    public boolean [] getFlags()
+    private boolean [] getFlags()
     {
         boolean [] flags = new boolean[50];
 
@@ -25,7 +25,7 @@ public class NumericLottery {
             int val;
 
             for (;;) {
-                val = random.nextInt(1, 50);
+                val = m_randomGenerator.nextInt(1, 50);
                 if (!flags[val])
                     break;
             }
@@ -35,18 +35,23 @@ public class NumericLottery {
         return flags;
     }
 
-    public NumericLottery()
+    public NumericLottery(RandomGenerator randomGenerator)
     {
-        random = new Random();
-    }
-
-    public NumericLottery(Random r)
-    {
-        random = r;
+        m_randomGenerator = randomGenerator;
     }
 
     public int [] getNumbers()
     {
         return getNumbers(getFlags());
+    }
+
+    public int [][] getNumbers(int count)
+    {
+        int [][] numbers = new int[count][];
+
+        for (int i = 0; i < count; ++i)
+            numbers[i] = getNumbers();
+
+        return numbers;
     }
 }
